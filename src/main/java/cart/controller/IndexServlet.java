@@ -10,7 +10,7 @@ import jakarta.servlet.http.HttpServletResponse;
 
 @WebServlet("/")
 public class IndexServlet extends HttpServlet {
-
+	//跑首頁的index
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		req.getRequestDispatcher("/WEB-INF/view/cart/index.jsp").forward(req, resp);
