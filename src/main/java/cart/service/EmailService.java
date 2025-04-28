@@ -31,7 +31,7 @@ public class EmailService {
 		// 使用 Gmail SMTP 伺服器
 		String host = "smtp.gmail.com";
 
-		// 設定屬性
+		// 設定屬性,google smtp的固定設定
 		Properties properties = new Properties();
 		properties.put("mail.smtp.auth", "true");
 		properties.put("mail.smtp.starttls.enable", "true");
@@ -57,10 +57,10 @@ public class EmailService {
 			// 設定收件者
 			message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(to));
 
-			// 設定郵件標題
+			// 設定郵件標題,可以改
 			message.setSubject("會員註冊確認信");
 
-			// 設定郵件內容讓使用者點選連結（confirmUrl）進行確認
+			// 設定郵件內容讓使用者點選連結（confirmUrl）進行確認,可以改成自己想要的
 			message.setText("請點選以下連結進行確認：\n" + confirmUrl);
 
 			// 傳送郵件

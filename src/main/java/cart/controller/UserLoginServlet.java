@@ -10,7 +10,7 @@ import jakarta.servlet.http.HttpServletResponse;
 
 @WebServlet("/user/login")
 public class UserLoginServlet extends HttpServlet {
-
+	// 登入不用導覽列
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		req.getRequestDispatcher("/WEB-INF/view/cart/user_login.jsp").forward(req, resp);

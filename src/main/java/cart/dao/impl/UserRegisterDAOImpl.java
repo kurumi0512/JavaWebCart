@@ -24,7 +24,7 @@ public class UserRegisterDAOImpl extends BaseDao implements UserRegisterDAO {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		return 0;
+		return 0; // 沒有資料更新
 	}
 
 	// email 驗證成功並修改 completed = true
