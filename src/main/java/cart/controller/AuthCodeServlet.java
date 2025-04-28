@@ -18,10 +18,22 @@ import jakarta.servlet.http.HttpServletResponse;
 @WebServlet("/user/authcode")
 public class AuthCodeServlet extends HttpServlet {
 
+	/*
+	 * 如果要用自訂認證碼可以使用這個方法,會隨機挑選亂數 0~9 a-z A-Z private String generateAuthCode() {
+	 * String chars =
+	 * "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
+	 * StringBuffer authcode = new StringBuffer(); Random random = new Random();
+	 * for(int i=0;i<4;i++) { int index = random.nextInt(chars.length()); // 隨機取位置
+	 * authcode.append(chars.charAt(index)); // 取得該位置的資料 } return
+	 * authcode.toString(); }
+	 */
+
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		Random random = new Random();
-		String authcode = String.format("%04d", random.nextInt(10000)); // 不足四位補0
+		Random random = new Random(); // 隨機挑選4個數字
+		String authcode = String.format("%04d", random.nextInt(10000)); // 0000~9999 的隨機數
+		// String authcode = generateAuthCode();
+
 		ImageIO.write(getAuthCodeImage(authcode), "JPEG", resp.getOutputStream());
 	}
 
@@ -41,6 +53,19 @@ public class AuthCodeServlet extends HttpServlet {
 		g.setFont(new Font("Arial", Font.BOLD, 22)); // 字體, 風格, 大小
 		// 繪文字
 		g.drawString(authcode, 18, 22); // (18, 22) 表示繪文字左上角的起點
+
+		// 加上干擾線
+		g.setColor(Color.RED);
+		Random random = new Random();
+		for (int i = 0; i < 15; i++) {
+			// 座標點
+			int x1 = random.nextInt(80); // 0~79
+			int y1 = random.nextInt(30); // 0~29
+			int x2 = random.nextInt(80); // 0~79
+			int y2 = random.nextInt(30); // 0~29
+			// 繪直線
+			g.drawLine(x1, y1, x2, y2);
+		}
 
 		return img;
 
