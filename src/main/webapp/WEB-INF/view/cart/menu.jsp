@@ -1,6 +1,9 @@
 <%@ page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="jakarta.tags.core" %>
+<%@ taglib prefix="fmt" uri="jakarta.tags.fmt" %>
+<%@ taglib prefix="fn" uri="jakarta.tags.functions" %>
 
 <style>
 	.item-count {
@@ -16,7 +19,6 @@
 		font-weight: bold; /* 文字加粗 */
 	}
 </style>    
-<!-- 寄生在別人網頁中的導覽列,所以不需要head -->
 <div style="background: #DDDDDD;padding: 20px">
 	${ username }&nbsp;&nbsp;&nbsp;&nbsp;
 	👨‍👨‍👧‍👧<a href="/JavaWebCart/user/list">使用者列表</a> | 

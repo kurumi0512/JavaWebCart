@@ -6,5 +6,5 @@ import cart.model.dto.UserDTO;
 
 public interface UserListService {
 	// 查詢所有使用者
-	List<UserDTO> findAllUser();
+	List<UserDTO> findAllUsers();
 }
