@@ -32,17 +32,18 @@ public class AuthCodeServlet extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		Random random = new Random(); // 隨機挑選4個數字
+		// %04d代表四位數,不足四位數補0
 		String authcode = String.format("%04d", random.nextInt(10000)); // 0000~9999 的隨機數
 		// String authcode = generateAuthCode();
 
 		// 將 authcode 存入到HttpSession 屬性中
 		HttpSession session = req.getSession();
 		session.setAttribute("authcode", authcode); // 注意不是存session!!
-
+		// getOutputStream 非文字的串流
 		ImageIO.write(getAuthCodeImage(authcode), "JPEG", resp.getOutputStream());
 	}
 
-	// 利用 Java2D 產生動態圖像
+	// 利用 Java2D 產生動態圖像,BufferedImage把圖形先產生在記憶體中
 	private BufferedImage getAuthCodeImage(String authcode) {
 		// 建立圖像區域(80x30 TGB)
 		BufferedImage img = new BufferedImage(80, 30, BufferedImage.TYPE_INT_RGB);
@@ -50,14 +51,14 @@ public class AuthCodeServlet extends HttpServlet {
 		Graphics g = img.getGraphics();
 		// 設定顏色
 		g.setColor(Color.white);
-		// 塗滿背景
+		// 塗滿背景,rect是矩形
 		g.fillRect(0, 0, 80, 30); // 全區域
 		// 設定顏色
 		g.setColor(Color.BLACK);
 		// 設定字型
-		g.setFont(new Font("Arial", Font.BOLD, 22)); // 字體, 風格, 大小
+		g.setFont(new Font("Arial", Font.BOLD, 22)); // 字體, 風格:粗體, 大小
 		// 繪文字
-		g.drawString(authcode, 18, 22); // (18, 22) 表示繪文字左上角的起點
+		g.drawString(authcode, 18, 22); // (18, 22) 表示繪文字左上角的起點,1234驗證碼第一個字開始的位置
 
 		// 加上干擾線
 		g.setColor(Color.RED);
@@ -73,6 +74,7 @@ public class AuthCodeServlet extends HttpServlet {
 		}
 
 		return img;
+		// img：你畫圖的畫紙（BufferedImage）。g：你拿在手上的畫筆（Graphics）。
 
 	}
 

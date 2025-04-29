@@ -37,7 +37,7 @@ public class UserRegisterServlet extends HttpServlet {
 		String emailConfirmLink = "http://localhost:8080/JavaWebCart/email/confirm?username=" + username;
 		emailService.sendEmail(email, emailConfirmLink);
 
-		// 準備要給 result.jsp 的資訊
+		// 準備要給 result.jsp 的資訊,如果不知道註冊結束後要到哪,可以寫訊息到result,這樣也可以通知註冊成功之類的
 		String resultTitle = "註冊結果";
 		String resultMessage = "用戶 " + username + " 註冊成功 !";
 		resultMessage += "<p />";
