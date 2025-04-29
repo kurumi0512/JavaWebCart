@@ -36,11 +36,11 @@ public class UserLoginServlet extends HttpServlet {
 		try {
 			UserDTO userDTO = userLoginService.login(username, password, authcode, sessionAuthcode);
 			resultMessage = username + " 登入成功!";
-			// 將登入資訊存入到 session 中
+			// 登入成功就將登入資訊存入到 session 中,以便其他頁面可以取得使用者相關資訊
 			session.setAttribute("userDTO", userDTO);
-		} catch (RuntimeException e) {
-			session.removeAttribute("userDTO"); // 移除舊有的登入資訊
-			resultMessage = e.getMessage();
+		} catch (RuntimeException e) { // 跑程式時發生的例外
+			session.removeAttribute("userDTO"); // 移除舊有的登入資訊,之前有的舊的都先移除
+			resultMessage = e.getMessage(); // service傳過來的RuntimeException錯誤訊息 放到resultMessage中
 		}
 
 		// 給 result.jsp 的資訊
