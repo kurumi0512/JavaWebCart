@@ -16,7 +16,7 @@ public class GetAuthCodeSessionServlet extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		HttpSession session = req.getSession();
-		resp.getWriter().print(session.getAttribute("authcode"));
+		resp.getWriter().print(session.getAttribute("authcode"));// 把authcode印出來
 
 	}
 

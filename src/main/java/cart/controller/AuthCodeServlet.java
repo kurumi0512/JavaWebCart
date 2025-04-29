@@ -60,12 +60,12 @@ public class AuthCodeServlet extends HttpServlet {
 		// 繪文字
 		g.drawString(authcode, 18, 22); // (18, 22) 表示繪文字左上角的起點,1234驗證碼第一個字開始的位置
 
-		// 加上干擾線
+		// 隨機畫紅色的干擾線
 		g.setColor(Color.RED);
 		Random random = new Random();
 		for (int i = 0; i < 15; i++) {
 			// 座標點
-			int x1 = random.nextInt(80); // 0~79
+			int x1 = random.nextInt(80); // 0~79,因為畫布是80x30 xy成一條線
 			int y1 = random.nextInt(30); // 0~29
 			int x2 = random.nextInt(80); // 0~79
 			int y2 = random.nextInt(30); // 0~29
