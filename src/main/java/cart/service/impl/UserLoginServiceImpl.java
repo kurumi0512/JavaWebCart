@@ -36,7 +36,7 @@ public class UserLoginServiceImpl implements UserLoginService {
 			}
 			// 5. 驗證成功
 			// user 轉 userDTO,回傳DTO不用帳號密碼
-			UserDTO userDTO = new UserDTO();
+			UserDTO userDTO = new UserDTO(); // 透過 getter 方法讀取 User 裡的資料，然後 用 setter 方法存進 UserDTO。
 			userDTO.setId(user.getId());
 			userDTO.setUsername(user.getUsername());
 			userDTO.setEmail(user.getEmail());

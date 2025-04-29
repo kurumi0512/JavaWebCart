@@ -25,7 +25,7 @@ public class UserLoginServlet extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		HttpSession session = req.getSession();
-
+		// 登入的時候要輸入的帳號密碼驗證碼
 		String username = req.getParameter("username");
 		String password = req.getParameter("password");
 		String authcode = req.getParameter("authcode");
