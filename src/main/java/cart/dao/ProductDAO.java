@@ -7,7 +7,8 @@ import cart.model.entity.Product;
 public interface ProductDAO {
 	List<Product> findAllProducts(); // 查詢全部
 
-	void add(ProductDAO product); // 新增
+	void add(Product product); // 新增
 
-	void delete(Integer productId); // 刪除, 根據指定productId
+	void delete(Integer productId); // 刪除, 根據指定 productId
+
 }
