@@ -12,7 +12,7 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
-//因為是要去商品頁面,所以要導回商品訂購頁面
+//因為要商品訂購,所以要導回商品訂購頁面(要把商品列出來)
 @WebServlet("/product/order")
 public class OrderServlet extends HttpServlet {
 

@@ -10,7 +10,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
-@WebFilter(urlPatterns = { "/user/list", "/product/list" })
+@WebFilter(urlPatterns = { "/user/list", "/product/*" }) // 代表有product/的頁面沒登入都會被阻擋
 public class LoginFilter extends HttpFilter {
 
 	@Override
