@@ -54,7 +54,7 @@ public class OrderDAOImpl extends BaseDao implements OrderDAO {
 			return; // 如果新增失敗直接return
 		}
 
-		// 扣抵庫存
+		// 扣抵庫存,去product的資料庫扣庫存,product的數量是qty!!
 		sql = "update product set qty = qty - ? where product_id = ?";
 		try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
 
