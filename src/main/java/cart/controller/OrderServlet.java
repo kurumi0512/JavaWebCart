@@ -22,6 +22,7 @@ public class OrderServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		// 取得所有商品
 		List<ProductDTO> productDTOs = productService.findAllProducts();
+		// 把這份商品清單存在 request 區域變數中，命名為 "productDTOs"。在 JSP 裡就可以透過${productDTOs}顯示資料
 		req.setAttribute("productDTOs", productDTOs);
 		// 將商品重導到訂單頁面
 		req.getRequestDispatcher("/WEB-INF/view/cart/product_order.jsp").forward(req, resp);

@@ -29,14 +29,14 @@ public class OrderAddCartServlet extends HttpServlet {
 		List<ProductDTO> cart = null; // 購物車
 		// 確認 session 中有無購物車資料
 		if (session.getAttribute("cart") == null) {
-			cart = new ArrayList<>(); // 建立空車
+			cart = new ArrayList<>(); // 如果購物車不存在，就建立一個新的空車
 		} else {
 			cart = (List<ProductDTO>) session.getAttribute("cart"); // 目前在使用中的購物車
 		}
 		// -------------------------------------------------------------------------
-		// 得到要購買的商品 id
+		// 得到要購買的商品 id,從網址中取得商品編號（如：?productId=3）。
 		Integer productId = Integer.parseInt(req.getParameter("productId"));
-		// 根據 productId 取得 ProductDTO
+		// 根據 productId 取得 ProductDTO。如果有找到對應商品，就把它加到購物車裡
 		Optional<ProductDTO> optProductDTO = productService.findAllProducts().stream()
 				.filter(dto -> dto.getProductId().equals(productId)).findFirst();
 
@@ -47,7 +47,7 @@ public class OrderAddCartServlet extends HttpServlet {
 			session.setAttribute("cart", cart);
 		}
 
-		// 回到訂單主頁
+		// 重新導向到 /product/order 頁面。回到訂單主頁
 		resp.sendRedirect("/JavaWebCart/product/order");
 
 		System.out.println(session.getAttribute("cart"));

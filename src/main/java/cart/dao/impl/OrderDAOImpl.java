@@ -104,9 +104,11 @@ public class OrderDAOImpl extends BaseDao implements OrderDAO {
 		String sql = "select item_id, order_id, product_id, quantity from order_item where order_id = ?";
 
 		try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
+			// 使用 JDBC 的 PreparedStatement 防止 SQL injection，把 ? 替換成傳進來的 orderId。
 			pstmt.setInt(1, orderId);
 
 			try (ResultSet rs = pstmt.executeQuery()) {
+				// 執行 SQL 查詢，rs.next() 表示有資料就一直往下讀。
 				while (rs.next()) {
 					// Mapping
 					OrderItem item = new OrderItem();
@@ -114,13 +116,14 @@ public class OrderDAOImpl extends BaseDao implements OrderDAO {
 					item.setOrderId(rs.getInt("order_id"));
 					item.setProductId(rs.getInt("product_id"));
 					item.setQuantity(rs.getInt("quantity"));
-					// 注入到 items 集合中
+					// 將這個項目加到 items 清單中。,注入到 items 集合中
 					items.add(item);
 				}
 			}
 
 		} catch (SQLException e) {
 			e.printStackTrace();
+			// 錯誤處理：如果連線或查詢時出錯，就印出錯誤資訊。
 		}
 
 		return items;
