@@ -24,7 +24,8 @@ public class OrderDAOImpl extends BaseDao implements OrderDAO {
 			pstmt.setInt(1, userId);
 			pstmt.executeUpdate(); // 執行更新
 
-			// 取得 order_id
+			// 從這個 ResultSet 中取出主鍵值（取得 order_id）
+			// 並存入變數 orderId。getInt(1) 表示取得第一個欄位（主鍵值）。
 			ResultSet generateKeys = pstmt.getGeneratedKeys();
 			if (generateKeys.next()) { // 有得到 key 資料
 				orderId = generateKeys.getInt(1); // 取得新增後自動生成的 order_id
@@ -40,7 +41,7 @@ public class OrderDAOImpl extends BaseDao implements OrderDAO {
 	@Override
 	public void addOrderItem(Integer orderId, Integer productId, Integer quantity) {
 		String sql = "insert into order_item(order_id, product_id, quantity) values(?, ?, ?)";
-
+		// 要先新增order 才能新增orderitem
 		try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
 
 			pstmt.setInt(1, orderId);
@@ -58,9 +59,9 @@ public class OrderDAOImpl extends BaseDao implements OrderDAO {
 		sql = "update product set qty = qty - ? where product_id = ?";
 		try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
 
-			pstmt.setInt(1, quantity);
-			pstmt.setInt(2, productId);
-
+			pstmt.setInt(1, quantity);// 把第一個 ? 替換成數量，例如 2
+			pstmt.setInt(2, productId);// 把第二個 ? 替換成產品 ID，例如 101
+			// update product set qty = qty - 2 where product_id = 101
 			pstmt.executeUpdate();
 
 		} catch (SQLException e) {
@@ -69,6 +70,7 @@ public class OrderDAOImpl extends BaseDao implements OrderDAO {
 
 	}
 
+	// 查詢某用戶的所有訂單
 	@Override
 	public List<Order> findAllOrdersByUserId(Integer userId) {
 		List<Order> orders = new ArrayList<>();
@@ -77,6 +79,7 @@ public class OrderDAOImpl extends BaseDao implements OrderDAO {
 			pstmt.setInt(1, userId);
 
 			try (ResultSet rs = pstmt.executeQuery()) {
+				// 建立一個新的 Order 物件，並把資料表查出來的每個欄位值注入（Mapping）進物件中
 				while (rs.next()) {
 					// Mapping
 					Order order = new Order();
@@ -94,6 +97,7 @@ public class OrderDAOImpl extends BaseDao implements OrderDAO {
 		return orders;
 	}
 
+	// 查詢某筆訂單的所有明細項目
 	@Override
 	public List<OrderItem> findAllOrderItemsByOrderId(Integer orderId) {
 		List<OrderItem> items = new ArrayList<>();

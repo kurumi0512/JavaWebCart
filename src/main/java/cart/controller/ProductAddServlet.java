@@ -27,10 +27,11 @@ public class ProductAddServlet extends HttpServlet {
 		String qty = req.getParameter("qty");
 		// 接收上傳檔案資料
 		// 將 Part 物件 -> 轉 byte[] -> 轉字串 -> 存入到資料表
+		// 使用 getPart() 抓取上傳的圖片檔案欄位，這個 Part 是 Servlet 處理 multipart/form-data 上傳的一部分
 		Part productImage = req.getPart("productImage");
 		// 將 productImage 轉 byte[]
 		byte[] bytes = productImage.getInputStream().readAllBytes();
-		// 將 byte[] 轉 base64 字串方便儲存到資料庫中
+		// 將 byte[] 轉 base64 字串方便儲存到資料庫中，並可以在網頁 <img> 標籤中直接顯示。
 		String productImageBase64 = Base64.getEncoder().encodeToString(bytes);
 
 		// 這裡會呼叫 add() 方法，把表單內容和圖片資料存到資料庫中
