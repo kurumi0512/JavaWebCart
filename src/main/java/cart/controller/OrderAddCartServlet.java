@@ -17,6 +17,8 @@ import jakarta.servlet.http.HttpSession;
 
 // 將商品加入到購物車中暫存
 // 將所訂購的商品暫時存放在 session 中
+//跳到/product/order/add/cart是一瞬間的事情,會直接購物車有1的數字
+//然後回直接導回product/order的頁面
 @WebServlet("/product/order/add/cart")
 public class OrderAddCartServlet extends HttpServlet {
 
