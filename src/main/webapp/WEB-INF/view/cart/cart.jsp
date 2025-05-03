@@ -43,11 +43,11 @@
                                         	<input type="submit" value="X" />
                                         </form>
                                     </td>
-                                    <td align="center">${status.index}</td> <!-- 商品索引 -->
-                                    <td align="center">${item.productId}</td> <!-- 商品 ID -->
-                                    <td>${item.productName}</td> <!-- 商品名稱 -->
-                                    <td align="right">${item.price}</td> <!-- 商品價格 -->
-                                    <td><img width="100" src="data:image/png;base64,${item.imageBase64}" /></td> <!-- Base64 格式嵌入圖片。 -->
+                                    <td align="center">${status.index}</td>
+                                    <td align="center">${item.productId}</td>
+                                    <td>${item.productName}</td>
+                                    <td align="right">${item.price}</td>
+                                    <td><img width="100" src="data:image/png;base64,${item.imageBase64}" /></td>
                                 </tr>
                             </c:forEach>
                             <!-- 總計 -->
