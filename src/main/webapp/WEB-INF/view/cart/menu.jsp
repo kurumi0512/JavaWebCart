@@ -18,7 +18,7 @@
 		font-size: 14px;
 		font-weight: bold; /* 文字加粗 */
 	}
-</style>    
+</style>    <!-- 從使用者的 Session 中存放的資料，通常在用戶登入後會儲存,存放使用者的姓名 -->
 <div style="background: #DDDDDD;padding: 20px">
 	${ sessionScope.userDTO.username }&nbsp;&nbsp;&nbsp;&nbsp;
 	👨‍👨‍👧‍👧<a href="/JavaWebCart/user/list">使用者列表</a> | 
@@ -27,11 +27,11 @@
 	📝<a href="/JavaWebCart/product/order">商品訂購</a> | 
 	<span class="item-count">
 		<c:choose>
-			<c:when test="${ empty cart }">
+			<c:when test="${ empty cart }"> <!-- cart 是空的，則顯示 0，即購物車中沒有商品 -->
 				0
 			</c:when>
 			<c:otherwise>
-				${ fn:length(sessionScope.cart)}
+				${ fn:length(sessionScope.cart)} <!-- 用來計算購物車列表 cart 的長度（即商品數量），並顯示出來。 -->
 			</c:otherwise>
 		</c:choose>
 	</span> 🛒<a href="/JavaWebCart/product/cart">商品購物車</a> | 

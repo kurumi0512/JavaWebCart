@@ -38,6 +38,7 @@
                                 <tr onmouseover="this.style.backgroundColor='#E0E0ff'" 
                                     onmouseout="this.style.backgroundColor=''">
                                     <td>
+                                    	<!--  status 的內建變數,status.index是目前項目的索引 -->
                                         <form method="post" action="/JavaWebCart/product/cart/item/delete">
                                         	<input type="hidden" name="index" value="${ status.index }" />
                                         	<input type="submit" value="X" />

@@ -15,6 +15,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
 // 購物車結帳
+//購物車結帳完畢後會跳到/product/cart/submit
 @WebServlet("/product/cart/submit")
 public class CartSubmitServlet extends HttpServlet {
 
@@ -25,12 +26,18 @@ public class CartSubmitServlet extends HttpServlet {
 		// 從 session 中取得 userDTO 與 cart 資訊
 		HttpSession session = req.getSession();
 		UserDTO userDTO = (UserDTO) session.getAttribute("userDTO");
+		/*
+		 * List<ProductDTO> cart = (List<ProductDTO>) session.getAttribute("cart"); cart
+		 * 是購物車內的商品列表，每一個商品是一個 ProductDTO 物件。 通常每次點「加入購物車」時，系統都會把商品加入這個清單，然後存回 Session。
+		 */
+
+		/* (List<ProductDTO>) 是 強制類型轉換,從物件轉乘ProductDTO */
 		List<ProductDTO> cart = (List<ProductDTO>) session.getAttribute("cart");
 
 		// 新增訂單到資料表
 		orderService.addOrder(userDTO.getId(), cart);
 
-		// 清空購物車
+		// 清空購物車,serAttribute是設定資料
 		session.setAttribute("cart", null);
 		// session.removeAttribute("cart");
 
